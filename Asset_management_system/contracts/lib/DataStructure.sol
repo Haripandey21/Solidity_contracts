@@ -2,7 +2,7 @@
 pragma solidity ^0.8.17;
 
 contract DataStructure{
- address public owner;
+    address public owner;
     uint256 average_buying_price;
     string[] public arrayTokensData;
     string[] public arrayExchangeData;
