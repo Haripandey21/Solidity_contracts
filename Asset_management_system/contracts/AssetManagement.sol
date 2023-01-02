@@ -78,4 +78,9 @@ for(uint j=0;j<arrayExchangeData.length;j++)
 return getTokens;
 }
 
+ function transferOwner(address _newOwner) public onlyOwner(msg.sender) {       
+        owner = _newOwner;
+        emit eventOwnerChanged(_newOwner);
+    }
+
 }

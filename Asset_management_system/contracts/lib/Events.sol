@@ -12,5 +12,9 @@ contract Events{
          string exchange,string token_name,uint256 quantity
 
     );
+
+    event eventOwnerChanged(
+        address newOwner
+    );
     
 }
