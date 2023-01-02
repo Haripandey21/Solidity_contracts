@@ -4,8 +4,8 @@
 ```
 ## Why Blockchain ? 
 ```bash 
-with Blockchain, Company holdings and all transactions are made transparent and immutable .
-All records/transactions are   
+ 
+All records/transactions/holdings of Company is transparent here, so if any suspicious activites can be detected easily.
 - for investors 
     * so to know where their investments are held. 
     * so to be safe from scam/fraud 
