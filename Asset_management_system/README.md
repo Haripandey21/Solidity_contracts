@@ -2,6 +2,10 @@
 ```bash
     A simple contract for  the private investment firm to keep track the records of its investmennts.
 ```
+```bash
+deployed_contract_Address : 0x5B66C53b4C90F08A4A4990310B0a7E7de5655185
+visit here : `https://goerli.etherscan.io/address/0x5B66C53b4C90F08A4A4990310B0a7E7de5655185`
+```
 ## Why Blockchain ? 
 ```bash 
  
