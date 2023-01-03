@@ -37,6 +37,7 @@ contract AssetManagement is DataStructure,Events,Modifiers {
             arrayTokensData.push(_token_name);
             arrayExchangeData.push(_exchange);
         }
+        emit eventTokenAdded(_exchange,_token_name,_quantity,_buying_price);
     }
 
     function withDrawTokens(
@@ -50,6 +51,31 @@ contract AssetManagement is DataStructure,Events,Modifiers {
         checkSufficientBalance(_exchange, _token_name, _balance)
     {
         mappedHoldings[_exchange][_token_name].quantity -= _balance;
+        emit eventTokenWithdrawal(_exchange, _token_name,_balance);
+
     }
+
+function getDataOfTokens() public view returns(tokenDetails[] memory){
+
+tokenDetails[] memory getTokens = new tokenDetails[](arrayTokensData.length); // new array of structure
+for(uint j=0;j<arrayExchangeData.length;j++)
+{
+ for (uint i=0;i<arrayTokensData.length;i++)
+
+{
+     if (mappedHoldings[arrayExchangeData[j]][arrayTokensData[i]].exists == true){
+      tokenDetails memory newTokenData = tokenDetails(
+                     mappedHoldings[arrayExchangeData[j]][arrayTokensData[i]].exchange,
+                     mappedHoldings[arrayExchangeData[j]][arrayTokensData[i]].token_name,
+                     mappedHoldings[arrayExchangeData[j]][arrayTokensData[i]].quantity
+                ); // new struct to save data 
+
+     getTokens[j]=newTokenData; // saving data to that new array
+                 
+     }
+}
+}
+return getTokens;
+}
 
 }

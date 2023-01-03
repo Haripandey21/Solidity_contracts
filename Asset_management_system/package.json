@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier-solidity": "npx prettier --write ./contracts/*.sol", 
+    "prettier-solidity": "npx prettier --write ./contracts/*.sol",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -17,5 +17,8 @@
     "husky": "^8.0.2",
     "prettier": "^2.8.1",
     "prettier-plugin-solidity": "^1.1.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
   }
 }

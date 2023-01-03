@@ -23,6 +23,7 @@ contract DataStructure{
     } 
     
      struct tokenDetails {
+        string exchange;
         string token_name;
         uint256 quantity;
     }
