@@ -4,6 +4,8 @@ pragma solidity ^0.8.17;
 contract BloodSupply{
 
 address public owner; 
+uint256 private supplier_id;
+uint256 private hospital_id;
 
 constructor(){
     owner=msg.sender;
@@ -22,14 +24,18 @@ struct donor{
 struct supplier{
     address[] supplierAddreses;
     string organization_name;
-    string location;
+
  }
- mapping(uint256 => supplier) public mappedSupplier;
+mapping(uint256 => supplier) internal mappedSupplier;
+
+
 
 struct hospital{
-     address[] HospitalAddreses;
+    address[] HospitalAddreses;
     string hospital_name;
  }
+mapping(uint256 => hospital) internal mappedHospital;
+
  struct patient{
     string patient_name;
     string age;
@@ -38,9 +44,8 @@ struct hospital{
     uint256 used_time;
  }
 
-mapping (uint256 => donor) public mappedDonor;  
-mapping(uint256 => hospital) public mappedHospital;
-mapping(uint256 => patient) public mappedPatient;
+mapping (uint256 => donor) internal mappedDonor;  
+mapping(uint256 => patient) internal mappedPatient;
 
 
 address[] public suppliers;
@@ -49,11 +54,8 @@ uint256[] public blood_unique_ids;
 
 
 event eventBloodAddded(uint256 blood_unique_id,string blood_group, uint256 blood_volume,uint256 donated_time);
-event eventSupplierAdded(address supplier,uint256 addedTime);
+event eventSupplierAdded(address supplier,string organization_name,uint256 addedTime);
 event eventHospitalAdded(address hospital,uint256 addedTime);
-
-
-
 
 modifier checkOwner(address _owner) {
     require(_owner==owner,"you are not a Owner !!");
@@ -77,11 +79,7 @@ modifier checkHospital(address _entity){
     _;
 } 
 
-function addSupplier(address _supplierAddress) public checkOwner(msg.sender) {
-    suppliers.push(_supplierAddress);
-    emit eventSupplierAdded(_supplierAddress,block.timestamp);
 
-}
 
 function addhospital(address _hospitalAddress) public checkOwner(msg.sender) {
     hospitals.push(_hospitalAddress);
@@ -104,7 +102,31 @@ uint256 _blood_unique_id=1200;
  return _blood_unique_id;
 }
 
-function
+function addSupplier(address _supplierAddress,string memory _organization_name) public checkOwner(msg.sender) {
+    for(uint256 i=0;i<supplier_id;i++)   
+    {
+   if (  keccak256(bytes(mappedSupplier[i].organization_name)) == keccak256(bytes(_organization_name)))
+
+        {
+            mappedSupplier[i].supplierAddreses.push(_supplierAddress);
+        }
+        else 
+
+         {
+             //   It is not possible to cast between fixed size arrays and dynamic size arrays.
+            //     so creating a temporary dynamic array and copy the elements.
+            address[] memory t = new address[](1);
+            t[0]=_supplierAddress;
+            mappedSupplier[supplier_id + 1]=supplier(t,_organization_name);
+            suppliers.push(_supplierAddress);
+            supplier_id++;
+        }
+      
+    }  
+    emit eventSupplierAdded(_supplierAddress,_organization_name,block.timestamp);
+
+}
+
 
 
 
