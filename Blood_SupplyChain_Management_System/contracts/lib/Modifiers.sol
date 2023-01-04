@@ -16,5 +16,12 @@ modifier checkSupplier(address _entity){
     }
     _;
 }
+modifier checkHospital(address _entity){
+    for(uint256 i=0;i<hospitals.length;i++)
+    {
+    require(_entity==hospitals[i],"You are not a Authorized Hospital !! ");
+    }
+    _;
+} 
 
  }
