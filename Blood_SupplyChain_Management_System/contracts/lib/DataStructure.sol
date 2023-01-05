@@ -3,12 +3,12 @@ pragma solidity ^0.8.17;
 
 contract DataStructure {
     address public owner;
-    uint256 public supplier_id;
-    uint256 public hospital_id;
+    uint256 internal supplier_id;
+    uint256 internal hospital_id;
     address[] public suppliers;
     address[] public hospitals;
-    uint256[] public blood_unique_ids;
-    uint256 public blood_unique_id=1200;
+    uint256[] internal blood_unique_ids;
+    uint256 internal blood_unique_id=1200;
 
     struct donor {
         string donor_name;
@@ -28,7 +28,7 @@ contract DataStructure {
     }
 
     struct hospital {
-        address Hospital_address;
+        address hospital_address;
         string hospital_name;
         uint256 added_time;
     }

@@ -14,18 +14,34 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         address _supplier_address,
         string memory _organization_name
     ) public checkOwner(msg.sender) {
-        for (uint256 i = 0; i <= supplier_id; i++) {
-            mappedSupplier[supplier_id] = supplier(
-                _supplier_address,
-                _organization_name,
-                block.timestamp
-            );
-        }
+        mappedSupplier[supplier_id] = supplier(
+            _supplier_address,
+            _organization_name,
+            block.timestamp
+        );
         suppliers.push(_supplier_address);
         supplier_id++;
         emit eventSupplierAdded(
             _supplier_address,
             _organization_name,
+            block.timestamp
+        );
+    }
+
+    function addHospital(
+        address _hospitalAddress,
+        string memory _hospital_name
+    ) public checkOwner(msg.sender) {
+        mappedHospital[hospital_id] = hospital(
+            _hospitalAddress,
+            _hospital_name,
+            block.timestamp
+        );
+        hospitals.push(_hospitalAddress);
+        hospital_id++;
+        emit eventHospitalAdded(
+            _hospitalAddress,
+            _hospital_name,
             block.timestamp
         );
     }
@@ -38,7 +54,6 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         string memory _blood_group,
         uint256 _blood_volume
     ) public checkSupplier(msg.sender) returns (uint256) {
-
         mappedDonor[blood_unique_id] = donor(
             _donor_name,
             _age,
@@ -60,7 +75,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         return blood_unique_id;
     }
 
-    function getSuppliers() public view returns (supplier[] memory) {
+    function getDataOfSuppliers() public view returns (supplier[] memory) {
         // new array of structure
         supplier[] memory supplierData = new supplier[](suppliers.length);
         for (uint256 i = 0; i < suppliers.length; i++) {
@@ -72,5 +87,18 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             supplierData[i] = newStructData;
         }
         return supplierData;
+    }
+
+    function getDataOfHospitals() public view returns (hospital[] memory) {
+        hospital[] memory hospitalData = new hospital[](hospitals.length);
+        for (uint256 i = 0; i < hospitals.length; i++) {
+            hospital memory newStructData = hospital(
+                mappedHospital[i].hospital_address,
+                mappedHospital[i].hospital_name,
+                mappedHospital[i].added_time
+            );
+            hospitalData[i] = newStructData;
+        }
+        return hospitalData;
     }
 }
