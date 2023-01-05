@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const hre = require("hardhat");
 
-describe("addSupplier function checking...", () => {
+describe("getDataOfDonors function checking...", () => {
     beforeEach(async () => {
         [addr1, addr2, addr3] = await hre.ethers.getSigners();
         instanceContract = await hre.ethers.getContractFactory("BloodSupply");
@@ -9,7 +9,7 @@ describe("addSupplier function checking...", () => {
         await deployedContract.addSupplier(addr2.address, "Lions club");
     });
 
-    it("Should add the suppliers.. ", async () => {
+    it("Should return data while calling from owner  ... ", async () => {
         await deployedContract.connect(addr2).addBlood("hari pandey",24,"male","kirtipur","0+ve",300);
         donorDetails= await deployedContract.connect(addr1).getDataOfDonors();
         // console.log("Donor details:",donorDetails);
