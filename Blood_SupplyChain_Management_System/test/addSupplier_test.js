@@ -12,11 +12,11 @@ describe("addSupplier function checking...", () => {
 
     it("Should add the suppliers.. ", async () => {
         suppliersList = await deployedContract.getDataOfSuppliers();
-        expect(suppliersList[0].supplier_address).is.equal(addr2.address)
-        expect(suppliersList[0].organization_name).is.equal("Lions club")
+        expect(suppliersList[0].supplier_address).is.equal(addr2.address);
+        expect(suppliersList[0].organization_name).is.equal("Lions club");
 
-        expect(suppliersList[1].supplier_address).is.equal(addr3.address)
-        expect(suppliersList[1].organization_name).is.equal("Luis blood suppliers")
+        expect(suppliersList[1].supplier_address).is.equal(addr3.address);
+        expect(suppliersList[1].organization_name).is.equal("Luis blood suppliers");
 
     });
 

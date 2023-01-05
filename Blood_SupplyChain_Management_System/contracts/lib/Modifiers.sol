@@ -12,7 +12,7 @@ contract Modifiers is DataStructure {
         for (uint256 i = 0; i < suppliers.length; i++) {
             require(
                 _entity == suppliers[i],
-                "You are not a Authorized Supplier !! "
+                "You are not a Authorized Supplier !!"
             );
         }
         _;
@@ -21,7 +21,7 @@ contract Modifiers is DataStructure {
         for (uint256 i = 0; i < hospitals.length; i++) {
             require(
                 _entity == hospitals[i],
-                "You are not a Authorized Hospital !! "
+                "You are not a Authorized Hospital !!"
             );
         }
         _;
