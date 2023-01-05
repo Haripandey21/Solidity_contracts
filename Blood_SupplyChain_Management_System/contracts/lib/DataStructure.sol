@@ -7,8 +7,7 @@ contract DataStructure {
     uint256 internal hospital_id;
     address[] public suppliers;
     address[] public hospitals;
-    uint256[] internal blood_unique_ids;
-    uint256 internal blood_unique_id=1200;
+    uint256 internal blood_unique_id;
 
     struct donor {
         string donor_name;
@@ -18,6 +17,11 @@ contract DataStructure {
         string blood_group;
         uint256 blood_volume;
         uint256 blood_unique_id;
+        uint256 donated_time;
+    }
+    struct bloodDetails{
+        uint256 blood_unique_id;
+        string blood_group;
         uint256 donated_time;
     }
 

@@ -64,7 +64,6 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             blood_unique_id,
             block.timestamp
         );
-        blood_unique_ids.push(blood_unique_id);
         blood_unique_id++;
         emit eventBloodAddded(
             blood_unique_id,
@@ -101,4 +100,23 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         }
         return hospitalData;
     }
+
+    function getDataOfDonors() external view checkOwner(msg.sender) returns(donor[] memory){
+        donor[] memory donorData= new donor[](blood_unique_id);
+        for (uint256 i=0;i<blood_unique_id;i++){
+            donor memory newStructData=donor(
+                mappedDonor[i].donor_name,
+                mappedDonor[i].age,
+                 mappedDonor[i].gender,
+                  mappedDonor[i].Address,
+                   mappedDonor[i].blood_group,
+                    mappedDonor[i].blood_volume,
+                     mappedDonor[i].blood_unique_id,
+                     mappedDonor[i].donated_time
+            );
+            donorData[i]=newStructData;
+        }
+        return donorData;
+    } 
+
 }
