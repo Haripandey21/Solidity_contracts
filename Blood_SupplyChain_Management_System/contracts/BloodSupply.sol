@@ -119,4 +119,17 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         return donorData;
     } 
 
+    function getDataOfBlood() external view returns(bloodDetails[] memory){
+        bloodDetails[] memory bloodData= new bloodDetails[](blood_unique_id);
+        for(uint256 i=0;i<blood_unique_id;i++){
+            bloodDetails memory newStructData=bloodDetails(
+                mappedDonor[i].blood_unique_id,
+                mappedDonor[i].blood_group,
+                mappedDonor[i].donated_time
+            );
+            bloodData[i]=newStructData;
+        }
+        return bloodData;
+    }
+
 }
