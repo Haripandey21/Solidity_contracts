@@ -11,11 +11,22 @@ contract Events {
     event eventSupplierAdded(
         address supplier,
         string organization_name,
-        uint256 addedTime
+        uint256 added_time
     );
     event eventHospitalAdded(
         address hospital,
         string hospital_name,
-        uint256 addedTime
+        uint256 added_time
+    );
+    event eventBloodShipped(
+        address supplier_address,
+        uint256 blood_id,
+        address hospital_address,
+        uint256 shipping_time
+    );
+    event eventBloodUsedByPatient(
+        address hospital_address,
+        uint256 blood_id,
+        uint256 used_time
     );
 }

@@ -7,6 +7,7 @@ contract DataStructure {
     uint256 internal hospital_id;
     address[] public suppliers;
     address[] public hospitals;
+    uint256[] internal patients;
     uint256 internal blood_unique_id;
 
     struct donor {
@@ -43,7 +44,9 @@ contract DataStructure {
         uint256 age;
         string Address;
         string blood_group;
+        uint256 used_blood_id;
         uint256 used_time;
+        
     }
 
     mapping(uint256 => supplier) internal mappedSupplier;
