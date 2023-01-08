@@ -90,7 +90,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
     }
 //--------------------------------Function for Hospitals ------------
 
-    function useBlood(
+    function giveBloodToPatients(
         uint256 _blood_id,
         string memory _patient_name,
         uint256 _age,
