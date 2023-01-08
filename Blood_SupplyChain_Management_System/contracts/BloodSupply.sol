@@ -150,6 +150,17 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         return bloodData;
     }
 
+      function getBloodStatus(uint256 _id) public view returns (string memory) {
+        return
+            (mappedBloodDetails[_id].current_status == Status.Active)
+                ? "Active"
+                : (mappedBloodDetails[_id].current_status == Status.Shipped)
+                ? "Shipped"
+                : (mappedBloodDetails[_id].current_status == Status.Fulfilled)
+                ? "Fulfilled"
+                : "No record of that Blood_id";
+    }
+
     // function only for owner
     function getDataOfDonors()
         external
@@ -173,4 +184,6 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         }
         return donorData;
     }
+
+  
 }
