@@ -62,7 +62,8 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             _blood_group,
             _blood_volume,
             blood_unique_id,
-            block.timestamp
+            block.timestamp,
+            Status.Active
         );
         blood_unique_id++;
         emit eventBloodAddded(

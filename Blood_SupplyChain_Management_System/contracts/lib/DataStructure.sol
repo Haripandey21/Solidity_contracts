@@ -18,6 +18,7 @@ contract DataStructure {
         uint256 blood_volume;
         uint256 blood_unique_id;
         uint256 donated_time;
+        Status current_status;
     }
     struct bloodDetails{
         uint256 blood_unique_id;
@@ -49,4 +50,12 @@ contract DataStructure {
     mapping(uint256 => hospital) internal mappedHospital;
     mapping(uint256 => donor) internal mappedDonor;
     mapping(uint256 => patient) internal mappedPatient;
+
+
+enum Status {    
+     pending,  // no record of blood, 
+     Active,  // Donor donated his blood & yet to be shipped to Hospital 
+     Shipped, // Blood shipped to Hospital * yet to be used by Patients
+     Fulfilled // Blood Used by patient 
+} 
 }
