@@ -18,12 +18,12 @@ contract DataStructure {
         uint256 blood_volume;
         uint256 blood_unique_id;
         uint256 donated_time;
-        Status current_status;
     }
     struct bloodDetails{
         uint256 blood_unique_id;
         string blood_group;
         uint256 donated_time;
+        Status current_status;
     }
 
     struct supplier {
@@ -50,6 +50,7 @@ contract DataStructure {
     mapping(uint256 => hospital) internal mappedHospital;
     mapping(uint256 => donor) internal mappedDonor;
     mapping(uint256 => patient) internal mappedPatient;
+    mapping(uint256 => bloodDetails) internal mappedBloodDetails;
 
 
 enum Status {    

@@ -26,4 +26,16 @@ contract Modifiers is DataStructure {
         }
         _;
     }
+
+      modifier existsHospitalPermission(address _addresss)
+    {
+        for (uint256 i = 0; i < hospitals.length; i++) {
+            require(
+                _addresss == hospitals[i],
+                "No permision to Ship Blood Here !!"
+            );
+        }
+        _;
+        
+    }
 }

@@ -9,7 +9,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
     constructor() {
         owner = msg.sender;
     }
-
+// -------------    Functions for Owner ----------------------------
     function addSupplier(
         address _supplier_address,
         string memory _organization_name
@@ -45,7 +45,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             block.timestamp
         );
     }
-
+    //    --------------- Functions for Suppliers   ----------
     function addBlood(
         string memory _donor_name,
         uint256 _age,
@@ -62,9 +62,9 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             _blood_group,
             _blood_volume,
             blood_unique_id,
-            block.timestamp,
-            Status.Active
+            block.timestamp
         );
+        mappedBloodDetails[blood_unique_id].current_status= Status.Active;
         blood_unique_id++;
         emit eventBloodAddded(
             blood_unique_id,
@@ -75,6 +75,14 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         return blood_unique_id;
     }
 
+
+function shipBloodToHospital(uint _blood_id,address _hospital_address) public 
+checkSupplier(msg.sender) existsHospitalPermission(_hospital_address)
+    {
+    mappedBloodDetails[_blood_id].current_status=Status.Shipped;    
+    }
+
+//           ---------   Functions for Public  -------------
     function getDataOfSuppliers() public view returns (supplier[] memory) {
         // new array of structure
         supplier[] memory supplierData = new supplier[](suppliers.length);
@@ -102,6 +110,21 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         return hospitalData;
     }
 
+       function getDataOfBlood() external view returns(bloodDetails[] memory){
+        bloodDetails[] memory bloodData= new bloodDetails[](blood_unique_id);
+        for(uint256 i=0;i<blood_unique_id;i++){
+            bloodDetails memory newStructData=bloodDetails(
+                mappedDonor[i].blood_unique_id,
+                mappedDonor[i].blood_group,
+                mappedDonor[i].donated_time,
+                mappedBloodDetails[i].current_status
+            );
+            bloodData[i]=newStructData;
+        }
+        return bloodData;
+    }
+
+    // function only for owner 
     function getDataOfDonors() external view checkOwner(msg.sender) returns(donor[] memory){
         donor[] memory donorData= new donor[](blood_unique_id);
         for (uint256 i=0;i<blood_unique_id;i++){
@@ -120,17 +143,8 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         return donorData;
     } 
 
-    function getDataOfBlood() external view returns(bloodDetails[] memory){
-        bloodDetails[] memory bloodData= new bloodDetails[](blood_unique_id);
-        for(uint256 i=0;i<blood_unique_id;i++){
-            bloodDetails memory newStructData=bloodDetails(
-                mappedDonor[i].blood_unique_id,
-                mappedDonor[i].blood_group,
-                mappedDonor[i].donated_time
-            );
-            bloodData[i]=newStructData;
-        }
-        return bloodData;
-    }
+ 
+
+
 
 }
