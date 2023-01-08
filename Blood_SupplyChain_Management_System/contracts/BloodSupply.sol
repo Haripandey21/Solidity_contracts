@@ -9,7 +9,8 @@ contract BloodSupply is DataStructure, Events, Modifiers {
     constructor() {
         owner = msg.sender;
     }
-// -------------    Functions for Owner ----------------------------
+
+    // -------------    Functions for Owner ----------------------------
     function addSupplier(
         address _supplier_address,
         string memory _organization_name
@@ -45,6 +46,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             block.timestamp
         );
     }
+
     //    --------------- Functions for Suppliers   ----------
     function addBlood(
         string memory _donor_name,
@@ -64,7 +66,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             blood_unique_id,
             block.timestamp
         );
-        mappedBloodDetails[blood_unique_id].current_status= Status.Active;
+        mappedBloodDetails[blood_unique_id].current_status = Status.Active;
         blood_unique_id++;
         emit eventBloodAddded(
             blood_unique_id,
@@ -75,14 +77,38 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         return blood_unique_id;
     }
 
-
-function shipBloodToHospital(uint _blood_id,address _hospital_address) public 
-checkSupplier(msg.sender) existsHospitalPermission(_hospital_address)
+    function shipBloodToHospital(
+        uint _blood_id,
+        address _hospital_address
+    )
+        public
+        checkSupplier(msg.sender)
+        existsHospitalPermission(_hospital_address)
     {
-    mappedBloodDetails[_blood_id].current_status=Status.Shipped;    
+        mappedBloodDetails[_blood_id].current_status = Status.Shipped;
     }
 
-//           ---------   Functions for Public  -------------
+    //          ------Function for Hospitals ------------
+
+    function useBlood(
+        uint256 _blood_id,
+        string memory _patient_name,
+        uint256 _age,
+        string memory _address,
+        string memory _blood_group,
+        uint256 _used_time
+    ) public checkHospital(msg.sender) {
+        mappedPatient[_blood_id] = patient(
+            _patient_name,
+            _age,
+            _address,
+            _blood_group,
+            _used_time
+        );
+        mappedBloodDetails[_blood_id].current_status = Status.Fulfilled;
+    }
+
+    //           ---------   Functions for Public  -------------
     function getDataOfSuppliers() public view returns (supplier[] memory) {
         // new array of structure
         supplier[] memory supplierData = new supplier[](suppliers.length);
@@ -110,41 +136,41 @@ checkSupplier(msg.sender) existsHospitalPermission(_hospital_address)
         return hospitalData;
     }
 
-       function getDataOfBlood() external view returns(bloodDetails[] memory){
-        bloodDetails[] memory bloodData= new bloodDetails[](blood_unique_id);
-        for(uint256 i=0;i<blood_unique_id;i++){
-            bloodDetails memory newStructData=bloodDetails(
+    function getDataOfBlood() external view returns (bloodDetails[] memory) {
+        bloodDetails[] memory bloodData = new bloodDetails[](blood_unique_id);
+        for (uint256 i = 0; i < blood_unique_id; i++) {
+            bloodDetails memory newStructData = bloodDetails(
                 mappedDonor[i].blood_unique_id,
                 mappedDonor[i].blood_group,
                 mappedDonor[i].donated_time,
                 mappedBloodDetails[i].current_status
             );
-            bloodData[i]=newStructData;
+            bloodData[i] = newStructData;
         }
         return bloodData;
     }
 
-    // function only for owner 
-    function getDataOfDonors() external view checkOwner(msg.sender) returns(donor[] memory){
-        donor[] memory donorData= new donor[](blood_unique_id);
-        for (uint256 i=0;i<blood_unique_id;i++){
-            donor memory newStructData=donor(
+    // function only for owner
+    function getDataOfDonors()
+        external
+        view
+        checkOwner(msg.sender)
+        returns (donor[] memory)
+    {
+        donor[] memory donorData = new donor[](blood_unique_id);
+        for (uint256 i = 0; i < blood_unique_id; i++) {
+            donor memory newStructData = donor(
                 mappedDonor[i].donor_name,
                 mappedDonor[i].age,
-                 mappedDonor[i].gender,
-                  mappedDonor[i].Address,
-                   mappedDonor[i].blood_group,
-                    mappedDonor[i].blood_volume,
-                     mappedDonor[i].blood_unique_id,
-                     mappedDonor[i].donated_time
+                mappedDonor[i].gender,
+                mappedDonor[i].Address,
+                mappedDonor[i].blood_group,
+                mappedDonor[i].blood_volume,
+                mappedDonor[i].blood_unique_id,
+                mappedDonor[i].donated_time
             );
-            donorData[i]=newStructData;
+            donorData[i] = newStructData;
         }
         return donorData;
-    } 
-
- 
-
-
-
+    }
 }

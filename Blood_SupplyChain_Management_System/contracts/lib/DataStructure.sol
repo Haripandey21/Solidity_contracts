@@ -40,7 +40,7 @@ contract DataStructure {
 
     struct patient {
         string patient_name;
-        string age;
+        uint256 age;
         string Address;
         string blood_group;
         uint256 used_time;
