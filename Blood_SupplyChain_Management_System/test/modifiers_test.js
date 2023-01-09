@@ -40,6 +40,25 @@ describe("Modifiers checking...", () => {
             .to.be.revertedWith("You are not a Authorized Supplier !!");    
         });           
      });
+     describe("should revert with message...", () => {
+        it("Should revert with message if passed hospital address is not listed... ", async () => {
+            await deployedContract.addSupplier(addr1.address, "Luis blood suppliers"); 
+            await deployedContract.addHospital(addr3.address, "Bir Hospital");
+            await deployedContract.connect(addr1).addBlood("Subash panthi",24,"male","teku","A+ve",800);
+            await expect(deployedContract.connect(addr1).shipBloodToHospital(0,addr2.address))
+            .to.be.revertedWith('No permision to Ship Blood Here !!'
+            );   
+        });
+        it("Should revert with message if supplier is not authorized/listed... ", async () => {
+            await deployedContract.addSupplier(addr1.address, "Luis blood suppliers"); 
+            await deployedContract.addHospital(addr3.address, "Bir Hospital");
+            await deployedContract.connect(addr1).addBlood("Subash panthi",24,"male","teku","A+ve",800);
+            await expect(deployedContract.connect(addr2).shipBloodToHospital(0,addr3.address))
+            .to.be.revertedWith('You are not a Authorized Supplier !!'
+            );   
+        });     
+         
+     });
 
     });
     
