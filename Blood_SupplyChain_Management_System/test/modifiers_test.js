@@ -56,8 +56,16 @@ describe("Modifiers checking...", () => {
             await expect(deployedContract.connect(addr2).shipBloodToHospital(0,addr3.address))
             .to.be.revertedWith('You are not a Authorized Supplier !!'
             );   
-        });     
-         
+        });   
+        it("Should revert with message if getPatientsData called other than owner . ", async () => {
+            await deployedContract.addSupplier(addr1.address, "Luis blood suppliers"); 
+            await deployedContract.addHospital(addr3.address, "Bir Hospital");
+            await deployedContract.connect(addr1).addBlood("Subash panthi",24,"male","teku","A+ve",800);
+            await deployedContract.connect(addr1).shipBloodToHospital(0,addr3.address);
+            await deployedContract.connect(addr3).giveBloodToPatients(0,"aman",24,"ktm","A+ve",1233);
+            await  expect(deployedContract.connect(addr2).getDataOfPatients())
+          .to.be.revertedWith("you are not a Owner !!");     
+                });  
      });
 
     });
