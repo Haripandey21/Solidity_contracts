@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prettier-solidity": "npx prettier --write ./contracts/*.sol", 
+    "prettier-solidity": "npx prettier --write ./contracts/*.sol",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "hardhat": "^2.12.5",
     "husky": "^8.0.3",
+    "mocha": "^10.2.0",
     "prettier": "^2.8.1",
     "prettier-plugin-solidity": "^1.1.1"
   }

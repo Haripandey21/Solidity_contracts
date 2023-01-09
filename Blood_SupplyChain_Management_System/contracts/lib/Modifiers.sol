@@ -8,17 +8,21 @@ contract Modifiers is DataStructure {
         _;
     }
 
-    modifier checkSupplier(address _entity) {
-        for (uint256 i = 0; i < suppliers.length; i++) {
-            require(
-                _entity == suppliers[i],
-                "You are not a Authorized Supplier !!"
-            );
-        }
-        _;
+  modifier checkSupplier(address _entity) {
+    require(supplier_id > 0, "There are no suppliers registered yet");
+    for (uint256 i = 0; i < supplier_id; i++) {
+        require(
+            _entity == suppliers[i],
+            "You are not a Authorized Supplier !!"
+        );
     }
+    _;
+}
+
+
     modifier checkHospital(address _entity) {
-        for (uint256 i = 0; i < hospitals.length; i++) {
+         require(hospital_id > 0, "There are no Hospitals registered yet");
+        for (uint256 i = 0; i < hospital_id; i++) {
             require(
                 _entity == hospitals[i],
                 "You are not a Authorized Hospital !!"
@@ -29,7 +33,8 @@ contract Modifiers is DataStructure {
 
       modifier existsHospitalPermission(address _addresss)
     {
-        for (uint256 i = 0; i < hospitals.length; i++) {
+    require(hospital_id > 0, "There are no Hospitals registered yet");
+        for (uint256 i = 0; i <hospital_id; i++) {
             require(
                 _addresss == hospitals[i],
                 "No permision to Ship Blood Here !!"
