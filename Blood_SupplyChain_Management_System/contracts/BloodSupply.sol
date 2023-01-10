@@ -13,11 +13,13 @@ contract BloodSupply is DataStructure, Events, Modifiers {
 // ------------------------    Functions for Owner    -----------------------
     function addSupplier(
         address _supplier_address,
-        string memory _organization_name
+        string memory _organization_name,
+         uint256 _phone_number
     ) public checkOwner(msg.sender) {
         mappedSupplier[supplier_id] = supplier(
             _supplier_address,
             _organization_name,
+            _phone_number,
             block.timestamp
         );
         suppliers.push(_supplier_address);
@@ -25,17 +27,20 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         emit eventSupplierAdded(
             _supplier_address,
             _organization_name,
+            _phone_number,
             block.timestamp
         );
     }
 
     function addHospital(
         address _hospitalAddress,
-        string memory _hospital_name
+        string memory _hospital_name,
+        uint256 _phone_number 
     ) public checkOwner(msg.sender) {
         mappedHospital[hospital_id] = hospital(
             _hospitalAddress,
             _hospital_name,
+            _phone_number,
             block.timestamp
         );
         hospitals.push(_hospitalAddress);
@@ -43,6 +48,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         emit eventHospitalAdded(
             _hospitalAddress,
             _hospital_name,
+            _phone_number,
             block.timestamp
         );
     }
@@ -119,6 +125,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             supplier memory newStructData = supplier(
                 mappedSupplier[i].supplier_address,
                 mappedSupplier[i].organization_name,
+                mappedSupplier[i].phone_number,
                 mappedSupplier[i].added_time
             );
             supplierData[i] = newStructData;
@@ -132,6 +139,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             hospital memory newStructData = hospital(
                 mappedHospital[i].hospital_address,
                 mappedHospital[i].hospital_name,
+                mappedHospital[i].phone_number,
                 mappedHospital[i].added_time
             );
             hospitalData[i] = newStructData;

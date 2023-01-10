@@ -30,12 +30,14 @@ contract DataStructure {
     struct supplier {
         address supplier_address;
         string organization_name;
+        uint256 phone_number;
         uint256 added_time;
     }
 
     struct hospital {
         address hospital_address;
         string hospital_name;
+        uint256 phone_number;
         uint256 added_time;
     }
 
