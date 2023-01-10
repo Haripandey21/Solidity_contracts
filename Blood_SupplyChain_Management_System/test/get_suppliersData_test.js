@@ -6,9 +6,9 @@ describe("getDataOfSuppliers function checking...", () => {
         [addr1, addr2, addr3,addr4] = await hre.ethers.getSigners();
         instanceContract = await hre.ethers.getContractFactory("BloodSupply");
         deployedContract = await instanceContract.deploy();
-        await deployedContract.addSupplier(addr2.address, "Lions club");
-        await deployedContract.addSupplier(addr3.address, "Luis blood suppliers");
-        await deployedContract.addSupplier(addr4.address, "Tichcule Suppliers");
+        await deployedContract.addSupplier(addr2.address, "Lions club",016713344);
+        await deployedContract.addSupplier(addr3.address, "Luis blood suppliers",9016713340);
+        await deployedContract.addSupplier(addr4.address, "Tichcule Suppliers",9016711111);
     });
 
     it("Should store data of suppliers correctly.. ", async () => {

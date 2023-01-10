@@ -6,7 +6,7 @@ describe("getDataOfDonors function checking...", () => {
         [addr1, addr2, addr3] = await hre.ethers.getSigners();
         instanceContract = await hre.ethers.getContractFactory("BloodSupply");
         deployedContract = await instanceContract.deploy();
-        await deployedContract.addSupplier(addr2.address, "Lions club");
+        await deployedContract.addSupplier(addr2.address, "Lions club",9016713333);
     });
 
     it("Should return data while calling from owner  ... ", async () => {

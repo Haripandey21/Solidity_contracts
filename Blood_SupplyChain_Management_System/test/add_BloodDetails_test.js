@@ -6,7 +6,7 @@ describe("addBlood function checking...", () => {
         [addr1, addr2, addr3] = await hre.ethers.getSigners();
         instanceContract = await hre.ethers.getContractFactory("BloodSupply");
         deployedContract = await instanceContract.deploy();
-        await deployedContract.addSupplier(addr2.address, "Tiger club");
+        await deployedContract.addSupplier(addr2.address, "Tiger club",9816713333);
     });
 
     it("Should store data in- `donor` struct, checking it by calling getDataOfDonors function... ", async () => {

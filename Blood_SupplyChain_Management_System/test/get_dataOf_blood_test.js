@@ -1,12 +1,12 @@
 const { expect } = require("chai");
 const hre = require("hardhat");
 
-describe("addBlood function checking...", () => {
+describe("getDataOfBlood function checking...", () => {
     beforeEach(async () => {
         [addr1, addr2, addr3] = await hre.ethers.getSigners();
         instanceContract = await hre.ethers.getContractFactory("BloodSupply");
         deployedContract = await instanceContract.deploy();
-        await deployedContract.addSupplier(addr2.address, "Tiger club");
+        await deployedContract.addSupplier(addr2.address, "Tiger club",9016713333);
     });
 
     it("Should store data in `bloodDetails` struct, checking it by calling getDataOfBlood function", async () => {
