@@ -10,11 +10,11 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         owner = msg.sender;
     }
 
-// ------------------------    Functions for Owner    -----------------------
+    // ------------------------    Functions for Owner    -----------------------
     function addSupplier(
         address _supplier_address,
         string memory _organization_name,
-         uint256 _phone_number
+        uint256 _phone_number
     ) public checkOwner(msg.sender) {
         mappedSupplier[supplier_id] = supplier(
             _supplier_address,
@@ -35,7 +35,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
     function addHospital(
         address _hospitalAddress,
         string memory _hospital_name,
-        uint256 _phone_number 
+        uint256 _phone_number
     ) public checkOwner(msg.sender) {
         mappedHospital[hospital_id] = hospital(
             _hospitalAddress,
@@ -53,7 +53,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         );
     }
 
-//--------------------     Functions for Suppliers   --------------
+    //--------------------     Functions for Suppliers   --------------
     function addBlood(
         string memory _donor_name,
         uint256 _age,
@@ -92,9 +92,15 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         existsHospitalPermission(_hospital_address)
     {
         mappedBloodDetails[_blood_id].current_status = Status.Shipped;
-        emit eventBloodShipped(msg.sender,_blood_id,_hospital_address,block.timestamp);
+        emit eventBloodShipped(
+            msg.sender,
+            _blood_id,
+            _hospital_address,
+            block.timestamp
+        );
     }
-//--------------------------------Function for Hospitals ------------
+
+    //--------------------------------Function for Hospitals ------------
 
     function giveBloodToPatients(
         uint256 _blood_id,
@@ -114,10 +120,10 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         );
         patients.push(_blood_id);
         mappedBloodDetails[_blood_id].current_status = Status.Fulfilled;
-        emit eventBloodUsedByPatient(msg.sender,_blood_id,block.timestamp);
+        emit eventBloodUsedByPatient(msg.sender, _blood_id, block.timestamp);
     }
 
-//----------------------------   Functions for Public  -------------
+    //----------------------------   Functions for Public  -------------
     function getDataOfSuppliers() external view returns (supplier[] memory) {
         // new array of structure
         supplier[] memory supplierData = new supplier[](suppliers.length);
@@ -161,7 +167,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         return bloodData;
     }
 
-      function getBloodStatus(uint256 _id) external view returns (string memory) {
+    function getBloodStatus(uint256 _id) external view returns (string memory) {
         return
             (mappedBloodDetails[_id].current_status == Status.Active)
                 ? "Active"
@@ -205,16 +211,15 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         patient[] memory patientData = new patient[](blood_unique_id);
         for (uint256 i = 0; i < patients.length; i++) {
             patient memory newStructData = patient(
-            mappedPatient[i].patient_name,
-            mappedPatient[i].age,
-             mappedPatient[i].Address,
-              mappedPatient[i].blood_group,
-              mappedPatient[i].used_blood_id,
-               mappedPatient[i].used_time
+                mappedPatient[i].patient_name,
+                mappedPatient[i].age,
+                mappedPatient[i].Address,
+                mappedPatient[i].blood_group,
+                mappedPatient[i].used_blood_id,
+                mappedPatient[i].used_time
             );
             patientData[i] = newStructData;
         }
         return patientData;
     }
-  
 }

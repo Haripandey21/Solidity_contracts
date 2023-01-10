@@ -1,3 +1,7 @@
+```bash 
+for etherscan visit here : 
+https://goerli.etherscan.io/address/0x871e13729c1a405412a94efff6a7286d395793d0
+```
 # Blood Supply Management system
 
 This Solidity smart contract is designed to manage the supply of blood within a hospital system. It allows hospitals and blood suppliers to be added to the system, and tracks the movement of blood from suppliers to hospitals and ultimately to patients. The contract includes several functions and events to facilitate these actions, as well as modifiers to enforce permissions and ensure that only authorized entities can perform certain actions.
