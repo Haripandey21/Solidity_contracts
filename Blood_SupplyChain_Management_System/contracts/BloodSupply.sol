@@ -43,6 +43,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             _phone_number,
             block.timestamp
         );
+        authorizedHospitals[_hospitalAddress]=true;
         hospitals.push(_hospitalAddress);
         hospital_id++;
         emit eventHospitalAdded(
@@ -61,7 +62,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
         string memory _Address,
         string memory _blood_group,
         uint256 _blood_volume
-    ) public checkSupplier(msg.sender) returns (uint256) {
+    ) public checkSupplier(msg.sender) {
         mappedDonor[blood_unique_id] = donor(
             _donor_name,
             _age,
@@ -80,7 +81,6 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             _blood_volume,
             block.timestamp
         );
-        return blood_unique_id;
     }
 
     function shipBloodToHospital(

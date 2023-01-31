@@ -8,37 +8,19 @@ contract Modifiers is DataStructure {
         _;
     }
 
-    modifier checkSupplier(address _entity) {
-        for (uint256 i = 0; i < supplier_id; i++) {
-            if (_entity == suppliers[i]) {
-                return;
-            }
-        }
-        require(false, "You are not a Authorized Supplier !!");
-        _;
-    }
+   modifier checkSupplier(address _entity) {
+    require(authorizedSuppliers[_entity], "You are not a Authorized Supplier !!");
+    _;
+}
 
-    modifier checkHospital(address _entity) {
-        for (uint256 i = 0; i < hospital_id; i++) {
-            if (_entity == hospitals[i]) {
-                return;
-            }
-        }
-        require(false, "You are not a Authorized Hospital !!");
+   modifier checkHospital(address _entity) {
+    require(authorizedHospitals[_entity], "You are not a Authorized Hospital !!");
+    _;
+}
 
-        _;
-    }
+   modifier existsHospitalPermission(address _addresss) {
+    require(authorizedHospitals[_addresss],  "No permision to Ship Blood Here !!");
+    _;
+} 
 
-    modifier existsHospitalPermission(address _addresss) {
-        for (uint256 i = 0; i < hospital_id; i++) {
-            if( _addresss == hospitals[i]){
-                return;
-            }
-            require(
-                false,
-                "No permision to Ship Blood Here !!"
-            );
-        }
-        _;
-    }
 }
