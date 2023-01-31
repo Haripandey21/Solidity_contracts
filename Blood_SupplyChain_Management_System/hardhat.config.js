@@ -7,7 +7,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.9",
+  solidity: "0.8.17",
   networks: {
     goerli: {
       url: ALCHEMY_HTTP_URL,
@@ -15,6 +15,6 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: "XMMP2ZJIEPT2R8GUT6CYEW98DVR7NQEZWN",
+    apiKey: "I8T1N6363W932KAMGBP3C5ATI8PYERS14M",
   },
 };
