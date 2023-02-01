@@ -22,6 +22,7 @@ contract BloodSupply is DataStructure, Events, Modifiers {
             _phone_number,
             block.timestamp
         );
+        authorizedSuppliers[_supplier_address]=true;
         suppliers.push(_supplier_address);
         supplier_id++;
         emit eventSupplierAdded(

@@ -58,8 +58,8 @@ contract DataStructure {
     mapping(uint256 => bloodDetails) internal mappedBloodDetails;
 
    // mappings to check suppliers,hospitals in modifiers, so not to check by loops
-    mapping (address => bool) public authorizedSuppliers;
-    mapping (address => bool) public authorizedHospitals;
+    mapping (address => bool) internal authorizedSuppliers;
+    mapping (address => bool) internal authorizedHospitals;
 
 enum Status {    
      pending,  // no record of blood, 
