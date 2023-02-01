@@ -1,5 +1,10 @@
 ```bash 
-for etherscan visit here : 
+Deployed COntract Address : 0xbd1d4e0a15c711751a1f99e513288095abf76855 
+for etherscan visit here : https://goerli.etherscan.io/address/0xbd1d4e0a15c711751a1f99e513288095abf76855 
+
+[![Project Showcase Video]
+(https://github.com/Haripandey21/Solidity_contracts/blob/main/Blood_SupplyChain_Management_System/images/1675228045504.png)]
+(https://www.youtube.com/watch?v=auTkLfloUbw)
 ```
 # Blood Supply Management system
 
