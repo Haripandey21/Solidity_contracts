@@ -3,9 +3,12 @@ Deployed COntract Address : 0xbd1d4e0a15c711751a1f99e513288095abf76855
 for etherscan visit here : https://goerli.etherscan.io/address/0xbd1d4e0a15c711751a1f99e513288095abf76855 
 
 ```
-[![Project Showcase Video]
-(https://github.com/Haripandey21/Solidity_contracts/blob/main/Blood_SupplyChain_Management_System/images/1675228045504.png)]
-(https://www.youtube.com/watch?v=auTkLfloUbw)
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=auTkLfloUbw">
+    <img src="https://github.com/Haripandey21/Solidity_contracts/blob/main/Blood_SupplyChain_Management_System/images/1675228045504.png" alt="YouTube Video">
+  </a>
+</p>
+
 # Blood Supply Management system
 
 This Solidity smart contract is designed to manage the supply of blood within a hospital system. It allows hospitals and blood suppliers to be added to the system, and tracks the movement of blood from suppliers to hospitals and ultimately to patients. The contract includes several functions and events to facilitate these actions, as well as modifiers to enforce permissions and ensure that only authorized entities can perform certain actions.
