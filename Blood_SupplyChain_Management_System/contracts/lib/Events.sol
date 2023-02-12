@@ -2,33 +2,23 @@
 pragma solidity ^0.8.17;
 
 contract Events {
-    event eventBloodAddded(
-        uint256 blood_unique_id,
-        string blood_group,
-        uint256 blood_volume,
-        uint256 donated_time
-    );
-    event eventSupplierAdded(
+  event EventSupplierAdded(
         address supplier,
-        string organization_name,
-        uint256 phone_number,
-        uint256 added_time
+        string organizationName,
+        uint256 phoneNumber,
+        uint256 addedTime
     );
-    event eventHospitalAdded(
+    event EventHospitalAdded(
         address hospital,
-        string hospital_name,
-        uint256 phone_number,
-        uint256 added_time
+        string hospitalName,
+        uint256 phoneNumber,
+        uint256 addedTime
     );
-    event eventBloodShipped(
-        address supplier_address,
-        uint256 blood_id,
-        address hospital_address,
-        uint256 shipping_time
+    event EventBloodShipped(
+        address supplierAddress,
+        uint256 bloodId,
+        address hospitalAddress,
+        uint256 shippingTime
     );
-    event eventBloodUsedByPatient(
-        address hospital_address,
-        uint256 blood_id,
-        uint256 used_time
-    );
+
 }

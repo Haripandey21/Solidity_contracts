@@ -3,68 +3,67 @@ pragma solidity ^0.8.17;
 
 contract DataStructure {
     address public owner;
-    uint256 internal supplier_id;
-    uint256 internal hospital_id;
+    uint256 internal supplierId;
+    uint256 internal hospitalId;
     address[] public suppliers;
     address[] public hospitals;
     uint256[] internal patients;
-    uint256 internal blood_unique_id;
+    uint256 internal bloodUniqueId;
 
-    struct donor {
-        string donor_name;
+    struct Donor {
+        string donorName;
         uint256 age;
         string gender;
         string Address;
-        string blood_group;
-        uint256 blood_volume;
-        uint256 blood_unique_id;
-        uint256 donated_time;
+        string bloodGroup;
+        uint256 bloodVolume;
+        uint256 bloodUniqueId;
+        uint256 donatedTime;
     }
-    struct bloodDetails{
-        uint256 blood_unique_id;
-        string blood_group;
-        uint256 donated_time;
-        Status current_status;
-    }
-
-    struct supplier {
-        address supplier_address;
-        string organization_name;
-        uint256 phone_number;
-        uint256 added_time;
+    struct BloodDetails {
+        uint256 bloodUniqueId;
+        string bloodGroup;
+        uint256 donatedTime;
+        Status currentStatus;
     }
 
-    struct hospital {
-        address hospital_address;
+    struct Supplier {
+        address supplierAddress;
+        string organizationName;
+        uint256 phoneNumber;
+        uint256 addedTime;
+    }
+
+    struct Hospital {
+        address hospitalAddress;
         string hospital_name;
-        uint256 phone_number;
-        uint256 added_time;
+        uint256 phoneNumber;
+        uint256 addedTime;
     }
 
-    struct patient {
-        string patient_name;
+    struct Patient {
+        string patientName;
         uint256 age;
         string Address;
-        string blood_group;
-        uint256 used_blood_id;
-        uint256 used_time;
-        
+        string bloodGroup;
+        uint256 usedBloodId;
+        uint256 usedTime;
     }
 
-    mapping(uint256 => supplier) internal mappedSupplier;
-    mapping(uint256 => hospital) internal mappedHospital;
-    mapping(uint256 => donor) internal mappedDonor;
-    mapping(uint256 => patient) internal mappedPatient;
-    mapping(uint256 => bloodDetails) internal mappedBloodDetails;
+    mapping(uint256 => Supplier) internal mappedSupplier;
+    mapping(uint256 => Hospital) internal mappedHospital;
+    mapping(uint256 => Donor) internal mappedDonor;
+    mapping(uint256 => Patient) internal mappedPatient;
+    mapping(uint256 => BloodDetails) internal mappedBloodDetails;
 
-   // mappings to check suppliers,hospitals in modifiers, so not to check by loops
-    mapping (address => bool) internal authorizedSuppliers;
-    mapping (address => bool) internal authorizedHospitals;
+    // mappings to check suppliers,hospitals in modifiers, so not to check by loops
+    mapping(address => bool) internal authorizedSuppliers;
+    mapping(address => bool) internal authorizedHospitals;
 
-enum Status {    
-     pending,  // no record of blood, 
-     Active,  // Donor donated his blood & yet to be shipped to Hospital 
-     Shipped, // Blood shipped to Hospital * yet to be used by Patients
-     Fulfilled // Blood Used by patient 
-} 
+    enum Status {
+        pending, // no record of blood,
+        Active, // Donor donated his blood & yet to be shipped to Hospital
+        Shipped, // Blood shipped to Hospital * yet to be used by Patients
+        Fulfilled // Blood Used by patient
+    }
 }
