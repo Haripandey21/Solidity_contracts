@@ -2,7 +2,7 @@
 Deployed COntract Address : 0x01FcD3B808a2413Bf7E5d746621E17CaC21DD258 
 for etherscan visit here : 
 https://goerli.etherscan.io/address/0x01FcD3B808a2413Bf7E5d746621E17CaC21DD258
-
+```
 <p align="center">
   <a href="https://www.youtube.com/watch?v=auTkLfloUbw">
     <img src="https://github.com/Haripandey21/Solidity_contracts/blob/main/Blood_SupplyChain_Management_System/images/1675228045504.png" alt="YouTube Video">
@@ -57,15 +57,12 @@ Here is a description of each function:
 
  # Events 
  The contract includes several events that are emitted at various points throughout its execution. These events include: 
-- eventBloodAdded: This event is emitted when a new blood donor is added to the system. 
-  It includes the blood's unique ID, blood group, volume, and donation time.
 - eventSupplierAdded: This event is emitted when a new blood supplier is added to the system. 
   It includes the supplier's address and organization name, as well as the time at which they were added.
 - eventHospitalAdded: This event is emitted when a new hospital is added to the system. 
  It includes the hospital's address and name, as well as the time at which they were added.
 - eventBloodShipped: This event is emitted when blood is shipped from a supplier to a hospital. 
   It includes the supplier's address, the blood's ID, the hospital's address, and the shipping time.
-- eventBloodUsedByPatient: emitted when blood is used by a patient at a hospital
 
 ## Modifiers
 The contract includes several modifiers that are used to enforce permissions and ensure that only authorized entities can perform certain actions. These modifiers include:
