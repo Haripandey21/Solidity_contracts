@@ -12,4 +12,4 @@ contract TimeLock is TimelockController {
     address admin
   ) TimelockController(minDelay, proposers, executors, admin) {}
 }
- 
+

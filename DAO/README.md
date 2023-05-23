@@ -44,12 +44,13 @@ Arguments: proposalId, targets, values, calldatas, descriptionhash
 
 cancel():
 Arguments: targets, values, calldatas, descriptionhash
-Description: Cancels a proposal with the specified targets, values, calldatas, and descriptionhash.
+
 
 4. Timelock.sol:
+
 -- > This contract serves as the owner of the Treasure contract.
     The Timelock contract enforces a minimum delay before executing any function after 
     it is passed by governance.
-    
+
 --> The GovernorContract is the only contract authorized to interact with the Timelock 
     contract and request execution if a vote passes.
