@@ -1,5 +1,5 @@
 {
-  "name": "whitelist_contract",
+  "name": "securedblocks.io",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,11 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^2.0.1",
-    "@nomiclabs/hardhat-etherscan": "^3.1.6",
-    "hardhat": "^2.12.7"
-  },
-  "dependencies": {
-    "dotenv": "^16.0.3"
+    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
+    "hardhat": "^2.16.1",
+    "prettier": "^3.0.0",
+    "prettier-plugin-solidity": "^1.1.3"
   }
 }
