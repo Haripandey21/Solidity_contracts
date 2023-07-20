@@ -1,10 +1,11 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-  const SecuredBlocksContract = await ethers.getContractFactory("SecuredBlocks");
-  const deployedSecuredBlocksContract = await SecuredBlocksContract.deploy();
-  await deployedSecuredBlocksContract.deployed();
-  console.log("SecuredBlocks Contract Address:-", deployedSecuredBlocksContract.address);
+  
+  const deployedContract = await ethers.deployContract("SecuredBlocks");
+  await deployedContract.waitForDeployment(); 
+  console.log("SimpleStorage Contract Address:", deployedContract.target);
+
 }
 main()
   .then(() => process.exit(0))

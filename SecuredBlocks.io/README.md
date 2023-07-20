@@ -1,13 +1,6 @@
 # Sample Hardhat Project
+Deployed and verfified at : 
+https://goerli.etherscan.io/address/0x23eC6063F3dB924BA1a2d9102354b2A1161435eF 
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
+deployed contract address : 0x23eC6063F3dB924BA1a2d9102354b2A1161435eF
 ```
