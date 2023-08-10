@@ -20,13 +20,13 @@ describe("grant access function testing...", function () {
     // Check if hospital1 is in the list of authorized hospitals for the patient
     const authorizedHospitals = await deployedContract
       .connect(patient)
-      .getAuthorizedHospitals();
+      .getAuthorizedEntities();
     expect(authorizedHospitals).to.include(hospital1.address);
 
     // Check if patient is in the list of authorized patients for hospital1
     const accessedPatientData = await deployedContract
       .connect(hospital1)
-      .getAccessedPatientData();
+      .getAuthorizedEntities();
     expect(accessedPatientData[0]).to.equal(patient.address);
   });
 

@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const hre = require("hardhat");
 
-describe("getAuthorizedHospitals function testing...", function () {
+describe("getAuthorizedEntities function testing...", function () {
   let deployedContract;
   let owner;
   let hospital1;
@@ -19,11 +19,22 @@ describe("getAuthorizedHospitals function testing...", function () {
     await deployedContract.connect(patient).grantAccess(hospital2.address);
   });
 
+  it("should retrieve patient data", async function () {
+    // Access patient data from hospital1
+    const accessedPatients = await deployedContract
+      .connect(hospital1)
+      .getAuthorizedEntities();
+
+    // Check if the list contains the expected hospital addresses
+    expect(accessedPatients).to.have.lengthOf(1);
+    expect(accessedPatients).to.include(patient.address);
+  });
+
   it("should retrieve authorized hospitals for a patient", async function () {
     // Retrieve the list of authorized hospitals for the patient
     const authorizedHospitals = await deployedContract
       .connect(patient)
-      .getAuthorizedHospitals();
+      .getAuthorizedEntities();
 
     // Check if the list contains the expected hospital addresses
     expect(authorizedHospitals).to.have.lengthOf(2);
@@ -38,7 +49,7 @@ describe("getAuthorizedHospitals function testing...", function () {
     // Retrieve the list of authorized hospitals for the new patient
     const authorizedHospitals = await deployedContract
       .connect(newPatient)
-      .getAuthorizedHospitals();
+      .getAuthorizedEntities();
 
     // Check if the list is empty
     expect(authorizedHospitals).to.have.lengthOf(0);
