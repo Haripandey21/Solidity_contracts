@@ -4,8 +4,9 @@ pragma solidity ^0.8.18;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "./lib/DataStructure.sol";
+import "./lib/Modifiers.sol";
 
-contract SecuredBlocks is ERC721URIStorage, DataStructure {
+contract SecuredBlocks is ERC721URIStorage, DataStructure, modifiers {
     using Counters for Counters.Counter;
     Counters.Counter public _tokenIdCounter;
 
@@ -13,7 +14,6 @@ contract SecuredBlocks is ERC721URIStorage, DataStructure {
         owner = msg.sender;
     }
 
-   
     // mint nft
     function safeMint(string memory uri) public {
         _tokenIdCounter.increment();
@@ -24,46 +24,44 @@ contract SecuredBlocks is ERC721URIStorage, DataStructure {
         _tokensByOwner[msg.sender].push(tokenId);
     }
 
-    // grant hospital address to access patient's Data
-    function grantAccess(address _hospitalAddress) public {
-        require(
-            msg.sender != _hospitalAddress,
-            "You cannot grant access to yourself"
+    // grant entity (patient/hospital) address to access data
+    function grantAccess(
+        address _entityAddress
+    ) public checkGrantPermission(_entityAddress) checkOwner(_entityAddress) {
+        mappedEntities[msg.sender][_entityAddress] = true;
+        mappedEntities[_entityAddress][msg.sender] = true;
+
+        patientAndHospitalRecords[msg.sender].authorizedEntities.push(
+            _entityAddress
         );
-
-        mappedPatient[msg.sender].push(_hospitalAddress);
-        mappedHospital[_hospitalAddress].push(msg.sender);
+        patientAndHospitalRecords[_entityAddress].authorizedEntities.push(
+            msg.sender
+        );
     }
 
-    // patient accessing the list of authorized Hospitals
-    function getAuthorizedHospitals() public view returns (address[] memory) {
-        return mappedPatient[msg.sender];
+    // revoke access from entity address to data
+    function revokeAccess(
+        address _entityAddress
+    ) public checkRevokePermission(_entityAddress) {
+        mappedEntities[msg.sender][_entityAddress] = false;
+        mappedEntities[_entityAddress][msg.sender] = false;
     }
 
-    // revoke access from hospital address to patient's Data
-    function revokeAccess(address _hospitalAddress) public {
-        address[] storage authorizedHospitals = mappedPatient[msg.sender];
-        address[] storage patientAddresses = mappedHospital[_hospitalAddress];
+    // entity accessing the list of authorized entities
+    function getAuthorizedEntities() public view returns (address[] memory) {
+        Entity memory entity = patientAndHospitalRecords[msg.sender];
+        address[] memory authorizedEntities = entity.authorizedEntities;
+        address[] memory result = new address[](authorizedEntities.length);
 
-        for (uint256 i = 0; i < authorizedHospitals.length; i++) {
-            if (authorizedHospitals[i] == _hospitalAddress) {
-                authorizedHospitals[i] = authorizedHospitals[
-                    authorizedHospitals.length - 1
-                ];
-                authorizedHospitals.pop();
-                break;
+        uint256 count = 0;
+        for (uint256 i = 0; i < authorizedEntities.length; i++) {
+            if (mappedEntities[msg.sender][authorizedEntities[i]]) {
+                result[count] = authorizedEntities[i];
+                count++;
             }
         }
 
-        for (uint256 j = 0; j < patientAddresses.length; j++) {
-            if (patientAddresses[j] == msg.sender) {
-                patientAddresses[j] = patientAddresses[
-                    patientAddresses.length - 1
-                ];
-                patientAddresses.pop();
-                break;
-            }
-        }
+        return result;
     }
 
     // Get all token IDs owned by an address
@@ -71,9 +69,5 @@ contract SecuredBlocks is ERC721URIStorage, DataStructure {
         address _address
     ) public view returns (uint256[] memory) {
         return _tokensByOwner[_address];
-    }
-
-    function getAccessedPatientData() public view returns (address[] memory) {
-        return mappedHospital[msg.sender];
     }
 }
