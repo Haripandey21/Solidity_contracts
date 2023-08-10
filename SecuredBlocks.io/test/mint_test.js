@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const hre = require("hardhat");
 
-describe("SecuredBlocks Contract", function () {
+describe("mint function testing...", function () {
   let deployedContract;
   beforeEach(async function () {
     [addr1, addr2] = await hre.ethers.getSigners();

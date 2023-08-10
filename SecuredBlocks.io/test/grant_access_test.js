@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const hre = require("hardhat");
 
-describe("SecuredBlocks", function () {
+describe("grant access function testing...", function () {
   let deployedContract;
   let owner;
   let hospital1;
@@ -16,18 +16,18 @@ describe("SecuredBlocks", function () {
 
   it("should grant access to a hospital", async function () {
     await deployedContract.connect(patient).grantAccess(hospital1.address);
- 
-    // Check if hospital1 is in the list of authorized hospitals for the patient
-    const authorizedHospitals = await deployedContract.getAuthorizedHospitals();
-    console.log("Authorized Hospitals:", authorizedHospitals); 
 
-    // expect(authorizedHospitals).to.include(hospital1.address);
-    
+    // Check if hospital1 is in the list of authorized hospitals for the patient
+    const authorizedHospitals = await deployedContract
+      .connect(patient)
+      .getAuthorizedHospitals();
+    expect(authorizedHospitals).to.include(hospital1.address);
+
     // Check if patient is in the list of authorized patients for hospital1
     const accessedPatientData = await deployedContract
       .connect(hospital1)
       .getAccessedPatientData();
-    // expect(accessedPatientData[0]).to.equal(patient.address);
+    expect(accessedPatientData[0]).to.equal(patient.address);
   });
 
   it("should not grant access to self", async function () {
