@@ -3,7 +3,11 @@ pragma solidity ^0.8.18;
 
 contract DataStructure {
     address public owner;
+
+    struct Entity {
+        address[] authorizedEntities;
+    }
     mapping(address => uint256[]) internal _tokensByOwner;
-    mapping(address => address[]) internal mappedPatient;
-    mapping(address => address[]) internal mappedHospital;
+    mapping(address => Entity) internal patientAndHospitalRecords;
+    mapping(address => mapping(address => bool)) internal mappedEntities;
 }
